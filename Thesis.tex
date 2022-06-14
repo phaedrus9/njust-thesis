@@ -1,0 +1,62 @@
+%%%%% ==========================================================================================
+%%
+%%     This is file `Thesis.tex'
+%%     The main file of njustThesis.
+%%     
+%%%%% ==========================================================================================
+
+
+%%%%% *********************************** Settings *********************************************
+\documentclass{sty/njustThesis}
+\usepackage{ctex}
+\usepackage[njust]{sty/commons}
+\usepackage{sty/custom}
+%% Use bibLaTeX(gb7714-2015):
+\usepackage[backend=biber,style=gb7714-2015,citestyle=gb7714-2015, gbnamefmt=lowercase]{biblatex}
+\addbibresource{MyReference.bib}
+%%%%% ==========================================================================================
+%%%%% *********************************** Content **********************************************
+\begin{document}
+\input{tex/cover}
+%%%%% ---------------------------------- Frontmatter -------------------------------------------
+%% 摘要，目录
+\frontmatter
+\input{tex/abstract}
+%% 生成论文目录
+\tableofcontents
+%\addcontentsline{toc}{chapter}{目录}
+%% 生成插图清单。如无需插图清单则可注释掉下述语句。
+%\listoffigures
+%\addcontentsline{toc}{chapter}{图目录}
+%% 生成附表清单。如无需附表清单则可注释掉下述语句。
+%\listoftables
+%\addcontentsline{toc}{chapter}{表格目录}
+%% 生成图表混合清单。如无需附表清单则可注释掉下述语句。
+\listoffiguresandtables
+%\addcontentsline{toc}{chapter}{图表目录}
+%% 生成术语表清单。如无需附表清单则可注释掉下述语句。
+%\centering\printnomenclature
+%\addcontentsline{toc}{chapter}{术语表}
+%%%%% ---------------------------------- Mainmatter --------------------------------------------
+%% 论文主要章节
+\mainmatter
+\input{tex/ch1-introduction}
+\input{tex/ch2}
+\input{tex/ch3}
+\input{tex/ch4}
+\input{tex/ch5-summary}
+%%%%% --------------------------------- Backmatter ---------------------------------------------
+%% 致谢
+\backmatter
+\input{tex/thanks}
+\cleardoublepage
+%% 参考文献
+\addcontentsline{toc}{chapter}{参考文献}
+\nocite{*}
+\centering\printbibliography[heading=bibliography,title=参考文献]
+%% 学术成果
+\input{tex/publications}
+\end{document}
+%%%%% ==========================================================================================
+%% End of file `Thesis.tex`.
+%%%%% ==========================================================================================

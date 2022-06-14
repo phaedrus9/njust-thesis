@@ -1,0 +1,163 @@
+%%%%% ==========================================================================================
+%%
+%%     This is file `commons.sty'
+%%     used for configure document styles
+%%     
+%%%%% ==========================================================================================
+
+
+%%%%% ******************************** Version Information *************************************
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesPackage{sty/commons}[2022/02/22 v2.2.2 Document Class for the Degree Papers of NJUST]
+%%%%% ==========================================================================================
+
+%%%%% ********************************** Declare Options ***************************************
+%%
+\newif\ifCOMMONS@njust\COMMONS@njustfalse
+% njust thesis style
+\DeclareOption{njust}{\COMMONS@njusttrue}
+%% end-user parameters, each option is declared by one declare option command
+\DeclareOption*{\PackageWarning{commons}{Unknown option '\CurrentOption'}}
+\ProcessOptions\relax
+%%%%% ==========================================================================================
+%%%%% ********************************** Required Packages *************************************
+\RequirePackage{ifxetex}
+\RequireXeTeX
+%%%%% ------------------------------------- Xelatex --------------------------------------------
+%% >>> System Font Environment
+%% If compile by "xelatex", then it support system fonts.
+%% Fonts and tweaks for xelatex:
+\RequirePackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+%% use tex style to support LaTeX quoting style.
+%% -- Set English fonts.
+%% Roman, or Serif - typefaces are named for the features at the ends of their strokes
+%% determine \rmfamily, usually for main contents
+%% because of \renewcommand*{\familydefault}{\rmdefault}, it's also determine \normalfont.
+%% examples: Times New Roman, Garamond, Adobe Garamond Pro
+%\setmainfont[BoldFont=Garamond-Bold,ItalicFont=Garamond-Italic]{Garamond}%
+%% Sans serif - typefaces without strokes (without serif) to get high readability
+%% determine \sffamily, usually for signage, headings that demanding high readability
+%% examples: Helvetica, Gill Sans, Futura
+%\setsansfont{Gill Sans MT}%
+%% Monospaced - typefaces that every glyph is the same width (opposed to variable-width fonts).
+%% determine \ttfamily, usually for programming, tabulated data, etc.
+%% examples: Rockwell, Andale Mono, Courier, Monaco
+%\setmonofont{Rockwell}%
+%%%%% ==========================================================================================
+%%%%% ********************************** Graphic packages **************************************
+%% graphics packages for including graphics
+\RequirePackage{graphicx}
+\DeclareGraphicsExtensions{.pdf,.eps,.jpg,.png}
+\graphicspath{img/}
+\RequirePackage[margin=10.5pt,font=small,labelfont=bf]{caption}
+%% caption options like:[margin=10pt,font=small,labelfont=bf]
+\RequirePackage[section]{placeins}% to prevent floats from being moved over section
+\usepackage{subfigure}% subcaptions for subfigures
+\usepackage{subfigmat}% matrices of similar subfigures, aka small mulitples
+\usepackage{overpic}
+\usepackage{caption}
+\DeclareCaptionLabelSeparator{none}{}
+\captionsetup{labelsep=none}
+\captionsetup{belowskip=-10pt}% narrow the skip between caption and main words
+\setlength\abovedisplayskip{0pt}% set display skip between equations and main words
+\setlength\belowdisplayskip{0pt}
+%%%%% ==========================================================================================
+%%%%% **************************** Page Layout and Line Spacing ********************************
+%% fancy headers and footers
+\RequirePackage{fancyhdr}
+%\RequirePackage{geometry}
+\RequirePackage{setspace}
+%% 上空30mm，下空24mm，左空25mm，右空25mm，对称页边距，页眉20mm，页脚20mm。
+%\geometry{headheight=2cm,headsep=3mm,footskip=2cm}
+%\geometry{top=3cm,bottom=2.4cm,left=2.5cm,right=2.5cm}
+%%% >>> Natural Sciences Citations and References
+%% if use bibtex citation, not need to use any packages!
+%% if use natbib package, then:
+%\RequirePackage{natbib}% author year citation mode
+%\RequirePackage[square,comma,numbers,sort&compress]{natbib}% numeric cite mode
+%\RequirePackage[square,comma,super,sort&compress]{natbib}% superscripted numeric cite mode
+%\bibliographystyle{apalike}% APA citation style
+%\bibliographystyle{unsrtnat}% sort as referenced
+%\bibliographystyle{plainnat}% sort by author name
+%\bibliographystyle{GBT7714-2005NLang}% sort as CHN standard 3-type 
+%\bibliographystyle{GBT7714-2005NLang_UP}
+%\bibliographystyle{GBT7714-2005NLang_Upp}
+%\bibliographystyle{GBT7714-2005}
+%\setlength{\bibsep}{0.5ex}  % vertical spacing between references
+%%
+%%% >>> Verbatim
+%%
+%% Improves the verbatim environment, fixing some bugs. Moreover
+%% it provides the comment environment, that lets you add multiple-line
+%% comments or easily comment out big parts of the code.
+%\RequirePackage{verbatim}
+%\RequirePackage{fancyvrb}
+%\RequirePackage{listing}
+%%
+%% >>> List Structures
+%%
+%\RequirePackage{enumerate}
+%%
+%%% >>> Color
+%%
+%\RequirePackage{color}
+%\RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
+%%
+%%% >>> Tables
+%%
+%% ctable package imports the array, tabularx and booktabs packages
+%% all commands from those packages are available as well.
+%\RequirePackage{ctable}
+\usepackage{booktabs}
+\usepackage{multirow}
+%%
+%% >>> Math packages
+%%
+\RequirePackage{amsmath,amssymb,amstext}
+%%
+%% >>> hyperref packages
+%%
+%% packages and settings depend on PDF mode
+\ifxetex % running xelatex in PDF mode
+  \RequirePackage[xetex]{hyperref}
+\else
+  \ifpdf % running pdfTeX in PDF mode
+    \RequirePackage[pdftex]{hyperref}
+  \fi
+\fi
+%% Setting Hyperlinks
+\hypersetup{% set hyperlinks.
+    %pdftitle={},% title
+    %pdfauthor={},% author
+    %pdfsubject={},% subject
+    %pdfkeywords={keyword1}{key2} {key3},% list of keywords, and uncomment this line if desired
+    %pdftoolbar=true,% show Acrobat’s toolbar?
+    %pdfmenubar=true,% show Acrobat’s menu?
+    pdffitwindow=false,% window fit to page when opened
+    pdfstartview={FitH},% fits the width of the page to the window
+    %pdfnewwindow=true,% links in new window
+    colorlinks=true,% false: boxed links; true: colored links
+    linkcolor=black,% color of internal links
+    citecolor=black,% color of links to bibliography
+    filecolor=black,% color of file links
+    urlcolor=black% color of external links
+    %hidelinks% remove link color and border.
+}
+%% it gives LaTeX the possibility to manage links
+%% within the document or to any URL when you compile in PDF.
+%% Just load the package in the preamble, at the end of all the
+%% other packages but prior to other settings.
+%%%%% ==========================================================================================
+%%%%% ************************** Configuration nomenclature ************************************
+%% set the nomenclature in two columns
+\usepackage{multicol}
+\usepackage{nomencl}
+\makenomenclature
+\renewcommand*\nompreamble{\begin{multicols}{2}}
+\renewcommand*\nompostamble{\end{multicols}}
+\def\nomname{术\NJUSTspace 语\NJUSTspace 表}
+\endinput
+%%%%% ==========================================================================================
+%% End of file `commons.sty`.
+%%%%% ==========================================================================================
